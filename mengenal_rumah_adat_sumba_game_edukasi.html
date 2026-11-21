@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Mengenal Rumah Adat Sumba - Game Edukasi</title>
+    <!-- Font ramah baca & bergaya ilustrasi buku cerita edukasi -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        :root {
+            --wood-dark: #3B2314;
+            --wood-medium: #5C3A21;
+            --terracotta: #B84A27;
+            --terracotta-dark: #8E3519;
+            --gold-ochre: #E29D38;
+            --gold-light: #FCE8B2;
+            --parchment: #FDF7EB;
+            --parchment-card: #FFFDF9;
+            --leaf-green: #3E6B48;
+            --ikat-red: #9E2A2B;
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #2A190E;
+            background-image: 
+                radial-gradient(circle at 20% 20%, rgba(184, 74, 39, 0.28) 0%, transparent 45%),
+                radial-gradient(circle at 80% 80%, rgba(226, 157, 56, 0.22) 0%, transparent 45%),
+                repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 10px);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--wood-dark);
+        }
+
+        /* Kontainer Utama Bergaya Layar Aplikasi Mobile */
+        .app-shell {
+            width: 100%;
+            max-width: 440px;
+            min-height: 100vh;
+            background-color: var(--parchment);
+            position: relative;
+            overflow-x: hidden;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65);
+        }
+
+        @media (min-width: 480px) {
+            body {
+                padding: 16px;
+            }
+            .app-shell {
+                min-height: 780px;
+                max-height: 860px;
+                border-radius: 32px;
+                border: 6px solid var(--wood-dark);
+            }
+        }
+
+        /* Ornamen Tenun Ikat Sumba di Bagian Atas & Bawah */
+        .ikat-border {
+            height: 12px;
+            width: 100%;
+            background: repeating-linear-gradient(
+                90deg,
+                #8E3519 0px, #8E3519 14px,
+                #E29D38 14px, #E29D38 20px,
+                #2C1A0E 20px, #2C1A0E 34px,
+                #FDF7EB 34px, #FDF7EB 38px
+            );
+            flex-shrink: 0;
+        }
+
+        .font-display {
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        /* Kartu & Tombol Bergaya Sketsa Ilustrasi Tebal (Comic/Storybook Outline) */
+        .sketch-card {
+            background: var(--parchment-card);
+            border: 3px solid var(--wood-dark);
+            border-radius: 20px;
+            box-shadow: 0 4px 0 var(--wood-dark);
+        }
+
+        .sketch-pill {
+            background: #FFF9EC;
+            border: 3px solid var(--wood-dark);
+            border-radius: 999px;
+            box-shadow: 0 3px 0 var(--wood-dark);
+        }
+
+        .sketch-btn {
+            background: var(--parchment-card);
+            border: 3px solid var(--wood-dark);
+            border-radius: 999px;
+            box-shadow: 0 4px 0 var(--wood-dark);
+            transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.15s ease;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 600;
+        }
+
+        .sketch-btn:hover {
+            background-color: #FFF3D6;
+            transform: translateY(-1px);
+            box-shadow: 0 5px 0 var(--wood-dark);
+        }
+
+        .sketch-btn:active {
+            transform: translateY(3px);
+            box-shadow: 0 1px 0 var(--wood-dark);
+        }
+
+        .sketch-btn-primary {
+            background: linear-gradient(180deg, #F2B24C 0%, #DF9126 100%);
+            color: var(--wood-dark);
+        }
+
+        .sketch-btn-primary:hover {
+            background: linear-gradient(180deg, #F7BC5E 0%, #E79B32 100%);
+        }
+
+        .sketch-btn-terracotta {
+            background: linear-gradient(180deg, #CF5B36 0%, #A93E1D 100%);
+            color: #FFFDF9;
+        }
+
+        .sketch-btn-terracotta:hover {
+            background: linear-gradient(180deg, #DA6742 0%, #B84724 100%);
+        }
+
+        .icon-circle-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--parchment-card);
+            border: 3px solid var(--wood-dark);
+            box-shadow: 0 3px 0 var(--wood-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.1s ease;
+            flex-shrink: 0;
+        }
+
+        .icon-circle-btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 1px 0 var(--wood-dark);
+        }
+
+        /* Animasi Transisi Layar */
+        .screen {
+            display: none;
+            flex-direction: column;
+            flex: 1;
+            padding: 16px 18px 22px;
+            animation: fadeSlideIn 0.28s ease-out;
+        }
+
+        .screen.active {
+            display: flex;
+        }
+
+        @keyframes fadeSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes floatHouse {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-4px); }
+        }
+
+        .house-float {
+            animation: floatHouse 3.5s ease-in-out infinite;
+        }
+
+        @keyframes shakeWrong {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-6px); }
+            40%, 80% { transform: translateX(6px); }
+        }
+
+        .shake-anim {
+            animation: shakeWrong 0.38s ease;
+        }
+
+        /* Hotspot Interaktif pada Ilustrasi Rumah */
+        .hotspot-zone {
+            cursor: pointer;
+            transition: opacity 0.2s ease, filter 0.2s ease;
+        }
+        .hotspot-zone:hover {
+            filter: brightness(1.08);
+        }
+        .hotspot-badge {
+            animation: pulseDot 1.8s infinite;
+        }
+        @keyframes pulseDot {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.14); }
+        }
+
+        /* Mode Teks Besar (Pengaturan Aksesibilitas) */
+        body.large-text .desc-text {
+            font-size: 1.08rem !important;
+            line-height: 1.6 !important;
+        }
+        body.large-text .quiz-opt-text {
+            font-size: 1.08rem !important;
+        }
+
+        /* Modal Overlay */
+        .modal-backdrop {
+            position: absolute;
+            inset: 0;
+            background: rgba(34, 19, 10, 0.72);
+            backdrop-filter: blur(3px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 50;
+        }
+        .modal-backdrop.open {
+            display: flex;
+            animation: fadeSlideIn 0.2s ease;
+        }
+    </style>
+</head>
+<body>
+
+<div class="app-shell" id="appShell">
+    <!-- Hiasan Motif Tenun Ikat Atas -->
+    <div class="ikat-border"></div>
+
+    <!-- =====================================================================
+         1. LAYAR MENU UTAMA (Sesuai Gambar 1 pada Sketsa + Visual Berwarna)
+    ====================================================================== -->
+    <section id="screen-menu" class="screen active justify-between">
+        <!-- Bar Status Mini (Progres & Bintang) -->
+        <div class="flex items-center justify-between px-1">
+            <div class="sketch-pill px-3 py-1 flex items-center gap-1.5 text-xs font-bold">
+                <span>🏝️</span>
+                <span>Budaya NTT</span>
+            </div>
+            <div class="sketch-pill px-3 py-1 flex items-center gap-1.5 text-xs font-bold bg-[#FCE8B2]">
+                <span>⭐</span>
+                <span>Skor Terbaik: <span id="menuBestScore">0</span></span>
+            </div>
+        </div>
+
+        <!-- Banner Judul Utama Bergaya Awan/Papan Kayu + Pita "Game Edukasi" -->
+        <div class="relative flex flex-col items-center mt-2">
+            <!-- Garis Sinar Dekoratif seperti di sketsa -->
+            <svg class="w-full max-w-[340px] h-auto" viewBox="0 0 360 155" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Sinar kiri & kanan atas -->
+                <path d="M35 28L16 14L28 36Z" fill="#E29D38" stroke="#3B2314" stroke-width="2.5" stroke-linejoin="round"/>
+                <path d="M52 16L45 4L60 13Z" fill="#B84A27" stroke="#3B2314" stroke-width="2.5" stroke-linejoin="round"/>
+                <path d="M325 28L344 14L332 36Z" fill="#E29D38" stroke="#3B2314" stroke-width="2.5" stroke-linejoin="round"/>
+                <path d="M308 16L315 4L300 13Z" fill="#B84A27" stroke="#3B2314" stroke-width="2.5" stroke-linejoin="round"/>
+
+                <!-- Awan / Bingkai Judul Utama -->
+                <path d="M52 42C52 25 85 15 180 15C275 15 308 25 308 42C325 48 332 65 322 82C330 98 318 115 295 116C272 124 88 124 65 116C42 115 30 98 38 82C28 65 35 48 52 42Z" fill="#FFFDF9" stroke="#3B2314" stroke-width="3.5"/>
+                
+                <!-- Pita "Game Edukasi" -->
+                <path d="M68 112L52 136L82 130L92 142L104 120" fill="#B84A27" stroke="#3B2314" stroke-width="3" stroke-linejoin="round"/>
+                <path d="M292 112L308 136L278 130L268 142L256 120" fill="#B84A27" stroke="#3B2314" stroke-width="3" stroke-linejoin="round"/>
+                <rect x="88" y="106" width="184" height="32" rx="14" fill="#E29D38" stroke="#3B2314" stroke-width="3"/>
+
+                <!-- Teks Judul -->
+                <text x="180" y="54" text-anchor="middle" font-family="Fredoka, sans-serif" font-weight="700" font-size="25" fill="#3B2314">Mengenal</text>
+                <text x="180" y="83" text-anchor="middle" font-family="Fredoka, sans-serif" font-weight="700" font-size="26" fill="#B84A27">Rumah Adat</text>
+                <text x="180" y="103" text-anchor="middle" font-family="Fredoka, sans-serif" font-weight="700" font-size="22" fill="#3B2314">Sumba</text>
+                <text x="180" y="127" text-anchor="middle" font-family="Fredoka, sans-serif" font-weight="700" font-size="15" fill="#3B2314">Game Edukasi</text>
+            </svg>
+        </div>
+
+        <!-- Ilustrasi Rumah Adat Uma Mbaru di Tengah -->
+        <div class="flex justify-center items-center my-1 house-float" id="menuHouseIllustration">
+            <!-- Diisi otomatis via SVG Helper -->
+        </div>
+
+        <!-- 4 Tombol Utama Menu (Sesuai Urutan Sketsa: Mulai, Tentang, Pengaturan, Keluar) -->
+        <div class="flex flex-col gap-3 px-4 mt-1">
+            <button onclick="openModeSelect()" class="sketch-btn sketch-btn-primary py-3 px-6 text-xl justify-between">
+                <span class="w-9 h-9 rounded-full bg-[#FFFDF9] border-2 border-[#3B2314] flex items-center justify-center text-base">▶</span>
+                <span>Mulai</span>
+                <span class="w-9"></span>
+            </button>
+
+            <button onclick="openModal('modal-about')" class="sketch-btn py-2.5 px-6 text-lg justify-between">
+                <span class="w-9 h-9 rounded-full bg-[#FCE8B2] border-2 border-[#3B2314] flex items-center justify-center font-extrabold text-base">i</span>
+                <span>Tentang</span>
+                <span class="w-9"></span>
+            </button>
+
+            <button onclick="openModal('modal-settings')" class="sketch-btn py-2.5 px-6 text-lg justify-between">
+                <span class="w-9 h-9 rounded-full bg-[#FCE8B2] border-2 border-[#3B2314] flex items-center justify-center text-base">⚙️</span>
+                <span>Pengaturan</span>
+                <span class="w-9"></span>
+            </button>
+
+            <button onclick="openModal('modal-exit')" class="sketch-btn py-2.5 px-6 text-lg justify-between">
+                <span class="w-9 h-9 rounded-full bg-[#FADBD8] border-2 border-[#3B2314] flex items-center justify-center text-base">🚪</span>
+                <span>Keluar</span>
+                <span class="w-9"></span>
+            </button>
+        </div>
+
+        <!-- Hiasan Semak Sudut Bawah seperti Sketsa -->
+        <div class="flex justify-between items-end pointer-events-none -mx-2 -mb-3 mt-2">
+            <svg width="64" height="36" viewBox="0 0 64 36" fill="none">
+                <path d="M2 34C2 18 14 8 24 14C26 6 38 6 42 18C52 16 60 24 60 34H2Z" fill="#4C8256" stroke="#3B2314" stroke-width="2.5"/>
+            </svg>
+            <span class="text-[11px] font-bold text-[#7A563A] pb-1">Ketuk "Mulai" untuk berpetualang!</span>
+            <svg width="64" height="36" viewBox="0 0 64 36" fill="none">
+                <path d="M62 34C62 18 50 8 40 14C38 6 26 6 22 18C12 16 4 24 4 34H62Z" fill="#4C8256" stroke="#3B2314" stroke-width="2.5"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         2. LAYAR MATERI BELAJAR INTERAKTIF (Sesuai Gambar 2 pada Sketsa)
+    ====================================================================== -->
+    <section id="screen-learn" class="screen justify-between">
+        <!-- Top Bar: Tombol Kembali, Pill Judul, Tombol Home -->
+        <div class="flex items-center justify-between gap-2">
+            <button onclick="navigateTo('screen-menu')" class="icon-circle-btn" aria-label="Kembali">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3B2314" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+            </button>
+
+            <div class="sketch-pill px-4 py-1.5 text-center flex-1 bg-[#FCE8B2]">
+                <h2 id="learnHeaderTitle" class="font-display font-bold text-base sm:text-lg leading-tight text-[#3B2314]">
+                    Rumah Adat Uma Mbaru
+                </h2>
+            </div>
+
+            <button onclick="navigateTo('screen-menu')" class="icon-circle-btn" aria-label="Beranda">
+                <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#3B2314" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1v-9.5z"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Tab Pilihan Topik Materi -->
+        <div class="flex gap-1.5 overflow-x-auto py-2 no-scrollbar" id="learnTopicTabs">
+            <button onclick="selectLearnTopic(0)" class="topic-tab sketch-pill px-3 py-1 text-xs font-extrabold whitespace-nowrap bg-[#B84A27] text-white">1. Uma Mbaru</button>
+            <button onclick="selectLearnTopic(1)" class="topic-tab sketch-pill px-3 py-1 text-xs font-extrabold whitespace-nowrap">2. 3 Tingkat Rumah</button>
+            <button onclick="selectLearnTopic(2)" class="topic-tab sketch-pill px-3 py-1 text-xs font-extrabold whitespace-nowrap">3. Filosofi Marapu</button>
+            <button onclick="selectLearnTopic(3)" class="topic-tab sketch-pill px-3 py-1 text-xs font-extrabold whitespace-nowrap">4. Bahan Alami</button>
+        </div>
+
+        <!-- Ilustrasi Rumah Adat dengan Hotspot Interaktif -->
+        <div class="relative bg-gradient-to-b from-[#FCECC7] to-[#F7D99C] border-3 border-[#3B2314] rounded-2xl p-2 flex flex-col items-center">
+            <div class="text-[11px] font-extrabold text-[#6E4423] bg-[#FFFDF9]/90 px-2.5 py-0.5 rounded-full border border-[#3B2314]/30 mb-1">
+                👆 Ketuk bagian atap, tengah, atau kolong rumah!
+            </div>
+            <div id="learnHouseContainer" class="w-full flex justify-center">
+                <!-- SVG Rumah Interaktif -->
+            </div>
+            <!-- Info Popup saat bagian rumah diketuk -->
+            <div id="hotspotInfoBanner" class="w-full mt-1 bg-[#3B2314] text-[#FFFDF9] text-xs rounded-xl px-3 py-2 flex items-center justify-between gap-2">
+                <span id="hotspotInfoText">✨ <b>Tip:</b> Ketuk ikon nomor 1, 2, atau 3 pada rumah untuk melihat fungsi tiap tingkat!</span>
+            </div>
+        </div>
+
+        <!-- Kartu Penjelasan Utama ("Apa itu Uma Mbaru ?") sesuai Sketsa -->
+        <div class="sketch-card p-3.5 mt-2.5">
+            <h3 id="learnQuestionTitle" class="font-display font-bold text-lg text-center text-[#B84A27] mb-1">
+                Apa itu Uma Mbaru ?
+            </h3>
+            <p id="learnDescription" class="desc-text text-sm text-center font-semibold text-[#3B2314] leading-relaxed">
+                Uma Mbaru adalah rumah adat khas Sumba yang berbentuk tinggi dan bertingkat. Rumah ini melambangkan hubungan harmonis manusia dengan leluhur dan alam.
+            </p>
+        </div>
+
+        <!-- Kartu "Ciri-ciri :" sesuai Sketsa -->
+        <div class="relative mt-4">
+            <div class="sketch-pill px-4 py-0.5 bg-[#E29D38] font-display font-bold text-sm text-[#3B2314] inline-block absolute -top-3.5 left-1/2 -translate-x-1/2 z-10">
+                Ciri-ciri :
+            </div>
+            <div class="sketch-card pt-4 pb-3 px-4">
+                <ul id="learnTraitsList" class="desc-text text-sm font-bold text-[#3B2314] space-y-1.5 list-disc pl-5">
+                    <li>Bentuk atap tinggi menjulang seperti menara</li>
+                    <li>Atap terbuat dari susunan daun alang-alang</li>
+                    <li>Dipakai untuk tempat tinggal & upacara adat</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Navigasi Bawah Materi: Lanjut Materi atau Langsung Kuis -->
+        <div class="flex gap-2.5 mt-3">
+            <button onclick="nextLearnTopic()" id="btnNextTopic" class="sketch-btn flex-1 py-2.5 px-3 text-sm bg-[#FFF9EC]">
+                Materi Berikutnya ➔
+            </button>
+            <button onclick="startQuiz()" class="sketch-btn sketch-btn-primary flex-1 py-2.5 px-3 text-sm">
+                🧠 Mulai Kuis!
+            </button>
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         3. LAYAR KUIS PENGETAHUAN (Sesuai Gambar 3 pada Sketsa)
+    ====================================================================== -->
+    <section id="screen-quiz" class="screen justify-between">
+        <!-- Top Bar: Back, Pill "Kuis Pengetahuan", Home -->
+        <div class="flex items-center justify-between gap-2">
+            <button onclick="navigateTo('screen-learn')" class="icon-circle-btn" aria-label="Kembali ke Materi">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3B2314" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+            </button>
+
+            <div class="sketch-pill px-4 py-1 text-center flex-1 bg-[#FCE8B2]">
+                <h2 class="font-display font-bold text-base sm:text-lg leading-tight text-[#3B2314]">
+                    Kuis Pengetahuan
+                </h2>
+                <div class="text-[11px] font-extrabold text-[#B84A27]" id="quizProgressLabel">Soal 1 dari 8</div>
+            </div>
+
+            <button onclick="navigateTo('screen-menu')" class="icon-circle-btn" aria-label="Beranda">
+                <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#3B2314" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1v-9.5z"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Kotak Pertanyaan sesuai Sketsa -->
+        <div class="sketch-card py-2.5 px-4 mt-2 text-center bg-[#FFFDF9]">
+            <p id="quizQuestionText" class="font-display font-semibold text-base sm:text-lg text-[#3B2314] leading-snug">
+                Apa nama rumah adat pada gambar ini ?
+            </p>
+        </div>
+
+        <!-- Kotak Gambar Ilustrasi Soal -->
+        <div class="sketch-card my-2 p-2 flex items-center justify-center bg-gradient-to-b from-[#FFF6E0] to-[#F6DFB0] min-h-[145px]" id="quizIllustrationBox">
+            <!-- Ilustrasi Dinamis Sesuai Soal -->
+        </div>
+
+        <!-- 4 Pilihan Jawaban (A, B, C, D) sesuai Sketsa -->
+        <div id="quizOptionsContainer" class="flex flex-col gap-2">
+            <!-- Diisi otomatis via JavaScript -->
+        </div>
+
+        <!-- Kotak Penjelasan Singkat setelah Menjawab -->
+        <div id="quizFeedbackBox" class="hidden mt-2 rounded-2xl border-2 border-[#3B2314] p-2.5 text-xs font-bold">
+            <div id="quizFeedbackText"></div>
+            <button onclick="nextQuizQuestion()" class="sketch-btn sketch-btn-primary w-full py-2 mt-2 text-sm">
+                Lanjut Soal Berikutnya ➔
+            </button>
+        </div>
+
+        <!-- Pill Skor di Bagian Bawah sesuai Sketsa ("Skor : 0") -->
+        <div class="flex justify-center items-center mt-2">
+            <div class="sketch-pill px-7 py-1.5 bg-[#FFFDF9] font-display font-bold text-base text-[#3B2314]">
+                Skor : <span id="quizScoreDisplay" class="text-[#B84A27]">0</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         4. LAYAR HASIL AKHIR KUIS (Selebrasi & Peringkat)
+    ====================================================================== -->
+    <section id="screen-result" class="screen justify-between items-center text-center">
+        <div class="w-full flex justify-end">
+            <button onclick="navigateTo('screen-menu')" class="icon-circle-btn" aria-label="Beranda">
+                <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#3B2314" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1v-9.5z"/>
+                </svg>
+            </button>
+        </div>
+
+        <div class="sketch-card p-5 w-full bg-[#FFFDF9] flex flex-col items-center">
+            <div class="text-4xl mb-1" id="resultStars">⭐⭐⭐</div>
+            <h2 class="font-display font-bold text-2xl text-[#B84A27]">Kuis Selesai!</h2>
+            <p class="text-sm font-bold text-[#6E4423] mt-0.5" id="resultRankBadge">Gelar: Duta Budaya Sumba</p>
+
+            <div class="my-4 bg-[#FCE8B2] border-3 border-[#3B2314] rounded-2xl px-8 py-3">
+                <div class="text-xs font-extrabold uppercase tracking-wider text-[#5C3A21]">Total Skor Kamu</div>
+                <div class="font-display font-bold text-4xl text-[#3B2314]" id="resultFinalScore">80</div>
+            </div>
+
+            <p id="resultMessage" class="text-sm font-semibold text-[#3B2314] leading-relaxed">
+                Luar biasa! Kamu sudah memahami struktur, filosofi, dan keunikan Rumah Adat Uma Mbaru dari Sumba dengan sangat baik.
+            </p>
+        </div>
+
+        <div class="flex flex-col gap-2.5 w-full px-2">
+            <button onclick="startQuiz()" class="sketch-btn sketch-btn-primary py-3 text-base">
+                🔄 Ulangi Kuis
+            </button>
+            <button onclick="openBuildGame()" class="sketch-btn sketch-btn-terracotta py-3 text-base">
+                🏗️ Mini-Game: Rakit Rumah Adat
+            </button>
+            <button onclick="navigateTo('screen-menu')" class="sketch-btn py-2.5 text-base">
+                🏠 Kembali ke Menu Utama
+            </button>
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         5. MINI-GAME BONUS: RAKIT RUMAH ADAT UMA MBARU
+    ====================================================================== -->
+    <section id="screen-build" class="screen justify-between">
+        <div class="flex items-center justify-between gap-2">
+            <button onclick="navigateTo('screen-menu')" class="icon-circle-btn" aria-label="Kembali">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3B2314" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+            </button>
+            <div class="sketch-pill px-4 py-1.5 text-center flex-1 bg-[#FCE8B2]">
+                <h2 class="font-display font-bold text-base text-[#3B2314]">Rakit Uma Mbaru</h2>
+            </div>
+            <button onclick="resetBuildGame()" class="icon-circle-btn" aria-label="Reset Rakit">
+                <span class="text-base">🔄</span>
+            </button>
+        </div>
+
+        <div class="sketch-card p-2.5 mt-2 text-center bg-[#FFF9EC]">
+            <p class="text-xs font-extrabold text-[#3B2314]" id="buildInstruction">
+                Susun rumah adat dari bawah ke atas! Pilih komponen fondasi terlebih dahulu:
+            </p>
+        </div>
+
+        <!-- Area Kanvas Perakitan Rumah -->
+        <div class="sketch-card my-2 p-3 flex-1 flex flex-col items-center justify-center bg-gradient-to-b from-[#E6F4F1] to-[#FCE8B2] relative min-h-[250px]">
+            <svg id="buildCanvasSvg" class="w-full max-w-[270px] h-auto" viewBox="0 0 280 240" fill="none">
+                <!-- Garis Tanah -->
+                <line x1="20" y1="220" x2="260" y2="220" stroke="#3B2314" stroke-width="4" stroke-linecap="round"/>
+                <path d="M24 220C24 210 34 204 42 208C45 202 55 203 58 212C65 210 70 215 70 220H24Z" fill="#4C8256" stroke="#3B2314" stroke-width="2"/>
+                <path d="M256 220C256 210 246 204 238 208C235 202 225 203 222 212C215 210 210 215 210 220H256Z" fill="#4C8256" stroke="#3B2314" stroke-width="2"/>
+
+                <!-- Bayangan Panduan (Blueprint) -->
+                <g opacity="0.22" stroke="#3B2314" stroke-width="2" stroke-dasharray="5 5">
+                    <rect x="65" y="168" width="150" height="52"/>
+                    <rect x="58" y="132" width="164" height="36"/>
+                    <path d="M35 132L108 72L122 24H158L172 72L245 132H35Z"/>
+                </g>
+
+                <!-- BAGIAN 1: Tiang Kayu & Kolong (Kali Kabunga) -->
+                <g id="buildPart1" class="hidden">
+                    <rect x="68" y="168" width="10" height="52" fill="#5C3A21" stroke="#3B2314" stroke-width="2.5"/>
+                    <rect x="98" y="168" width="10" height="52" fill="#5C3A21" stroke="#3B2314" stroke-width="2.5"/>
+                    <rect x="172" y="168" width="10" height="52" fill="#5C3A21" stroke="#3B2314" stroke-width="2.5"/>
+                    <rect x="202" y="168" width="10" height="52" fill="#5C3A21" stroke="#3B2314" stroke-width="2.5"/>
+                    <!-- Balok Pengikat -->
+                    <rect x="62" y="188" width="156" height="8" fill="#8C5832" stroke="#3B2314" stroke-width="2"/>
+                    <!-- Tangga Depan -->
+                    <path d="M124 220L130 168H150L156 220" fill="#A66E38" stroke="#3B2314" stroke-width="2.5"/>
+                    <line x1="126" y1="208" x2="154" y2="208" stroke="#3B2314" stroke-width="2.5"/>
+                    <line x1="127" y1="196" x2="153" y2="196" stroke="#3B2314" stroke-width="2.5"/>
+                    <line x1="128" y1="184" x2="152" y2="184" stroke="#3B2314" stroke-width="2.5"/>
+                </g>
+
+                <!-- BAGIAN 2: Badan Rumah & Teras (Bei) -->
+                <g id="buildPart2" class="hidden">
+                    <rect x="58" y="132" width="164" height="36" rx="4" fill="#C98A4B" stroke="#3B2314" stroke-width="2.5"/>
+                    <!-- Pagar Teras Bambu -->
+                    <rect x="54" y="144" width="172" height="24" fill="#E3B274" stroke="#3B2314" stroke-width="2.5"/>
+                    <line x1="74" y1="144" x2="74" y2="168" stroke="#3B2314" stroke-width="2"/>
+                    <line x1="94" y1="144" x2="94" y2="168" stroke="#3B2314" stroke-width="2"/>
+                    <line x1="114" y1="144" x2="114" y2="168" stroke="#3B2314" stroke-width="2"/>
+                    <line x1="166" y1="144" x2="166" y2="168" stroke="#3B2314" stroke-width="2"/>
+                    <line x1="186" y1="144" x2="186" y2="168" stroke="#3B2314" stroke-width="2"/>
+                    <line x1="206" y1="144" x2="206" y2="168" stroke="#3B2314" stroke-width="2"/>
+                    <!-- Pintu Masuk -->
+                    <rect x="130" y="136" width="20" height="32" fill="#4A2C18" stroke="#3B2314" stroke-width="2.5"/>
+                </g>
+
+                <!-- BAGIAN 3: Atap Menara Alang-Alang (Uma Daluku) -->
+                <g id="buildPart3" class="hidden">
+                    <path d="M32 134C62 115 95 92 112 68L122 22H158L168 68C185 92 218 115 248 134C215 139 65 139 32 134Z" fill="#D4A359" stroke="#3B2314" stroke-width="3" stroke-linejoin="round"/>
+                    <!-- Tekstur Serat Alang-alang -->
+                    <path d="M128 32L122 65M140 30V66M152 32L158 65" stroke="#7A5226" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M106 82L85 118M124 82L112 122M140 82V124M156 82L168 122M174 82L195 118" stroke="#7A5226" stroke-width="2" stroke-linecap="round"/>
+                    <!-- Tanduk/Mahkota Bubungan -->
+                    <line x1="120" y1="22" x2="160" y2="22" stroke="#3B2314" stroke-width="4" stroke-linecap="round"/>
+                    <circle cx="122" cy="18" r="3" fill="#B84A27"/>
+                    <circle cx="158" cy="18" r="3" fill="#B84A27"/>
+                </g>
+            </svg>
+        </div>
+
+        <!-- Fakta Edukasi Saat Komponen Terpasang -->
+        <div id="buildFactBox" class="sketch-card p-2.5 mb-2 bg-[#FFFDF9] text-xs font-bold text-[#3B2314]">
+            💡 <b>Tahap 1:</b> Pasang <b>Tiang Kayu & Kolong (Kali Kabunga)</b> terlebih dahulu sebagai penyangga rumah panggung!
+        </div>
+
+        <!-- Tombol Komponen yang Bisa Dipilih Pemain -->
+        <div class="grid grid-cols-3 gap-2" id="buildButtonsGrid">
+            <button onclick="placeBuildPart(3)" id="btnPart3" class="sketch-btn flex-col py-2 px-1.5 text-xs rounded-2xl">
+                <span class="text-xl mb-0.5">⛺</span>
+                <span>Atap Menara</span>
+            </button>
+            <button onclick="placeBuildPart(1)" id="btnPart1" class="sketch-btn flex-col py-2 px-1.5 text-xs rounded-2xl">
+                <span class="text-xl mb-0.5">🪵</span>
+                <span>Tiang Kolong</span>
+            </button>
+            <button onclick="placeBuildPart(2)" id="btnPart2" class="sketch-btn flex-col py-2 px-1.5 text-xs rounded-2xl">
+                <span class="text-xl mb-0.5">🏛️</span>
+                <span>Badan & Teras</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         MODAL PILIHAN MODE BELAJAR / BERMAIN (Saat Klik "Mulai")
+    ====================================================================== -->
+    <div id="modal-modes" class="modal-backdrop">
+        <div class="sketch-card w-full max-w-[360px] p-5 bg-[#FDF7EB] relative">
+            <button onclick="closeModal('modal-modes')" class="icon-circle-btn w-9 h-9 absolute -top-3 -right-3 text-sm font-extrabold">✕</button>
+            <h3 class="font-display font-bold text-xl text-center text-[#3B2314] mb-1">Pilih Aktivitas</h3>
+            <p class="text-xs text-center font-bold text-[#6E4423] mb-4">Belajar mengenal Rumah Adat Sumba dengan cara seru!</p>
+
+            <div class="flex flex-col gap-3">
+                <button onclick="closeModal('modal-modes'); navigateTo('screen-learn')" class="sketch-btn sketch-btn-primary p-3 rounded-2xl justify-start gap-3 text-left">
+                    <span class="text-2xl">📖</span>
+                    <div>
+                        <div class="font-display text-base leading-tight">1. Materi Belajar</div>
+                        <div class="text-xs font-Nunito font-semibold opacity-90">Eksplorasi bagian & filosofi Uma Mbaru</div>
+                    </div>
+                </button>
+
+                <button onclick="closeModal('modal-modes'); startQuiz()" class="sketch-btn sketch-btn-terracotta p-3 rounded-2xl justify-start gap-3 text-left">
+                    <span class="text-2xl">🧠</span>
+                    <div>
+                        <div class="font-display text-base leading-tight">2. Kuis Pengetahuan</div>
+                        <div class="text-xs font-Nunito font-semibold opacity-95">Uji wawasanmu lewat 8 soal bergambar</div>
+                    </div>
+                </button>
+
+                <button onclick="closeModal('modal-modes'); openBuildGame()" class="sketch-btn p-3 rounded-2xl justify-start gap-3 text-left bg-[#FFFDF9]">
+                    <span class="text-2xl">🏗️</span>
+                    <div>
+                        <div class="font-display text-base leading-tight text-[#3B2314]">3. Rakit Rumah Adat</div>
+                        <div class="text-xs font-Nunito font-semibold text-[#6E4423]">Mini-game menyusun 3 tingkat Uma Mbaru</div>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- =====================================================================
+         MODAL TENTANG (Tombol "Tentang" di Menu Utama)
+    ====================================================================== -->
+    <div id="modal-about" class="modal-backdrop">
+        <div class="sketch-card w-full max-w-[360px] p-5 bg-[#FDF7EB] relative">
+            <button onclick="closeModal('modal-about')" class="icon-circle-btn w-9 h-9 absolute -top-3 -right-3 text-sm font-extrabold">✕</button>
+            <div class="text-center mb-2">
+                <span class="text-3xl">🏝️</span>
+                <h3 class="font-display font-bold text-xl text-[#B84A27]">Tentang Aplikasi</h3>
+            </div>
+            <div class="sketch-card p-3.5 text-xs sm:text-sm font-semibold text-[#3B2314] space-y-2 leading-relaxed">
+                <p>
+                    <b>Mengenal Rumah Adat Sumba</b> adalah media pembelajaran interaktif berbasis web untuk mengenalkan arsitektur tradisional <b>Uma Mbaru</b> dari Pulau Sumba, Nusa Tenggara Timur (NTT).
+                </p>
+                <p>
+                    <b>Tujuan Edukasi:</b>
+                    <br>• Memahami bentuk dan struktur 3 tingkat rumah adat Sumba.
+                    <br>• Mengenal kearifan lokal dan filosofi Marapu.
+                    <br>• Melestarikan budaya Nusantara lewat kuis & simulasi interaktif.
+                </p>
+            </div>
+            <button onclick="closeModal('modal-about')" class="sketch-btn sketch-btn-primary w-full py-2.5 mt-4 text-base">
+                Mengerti
+            </button>
+        </div>
+    </div>
+
+    <!-- =====================================================================
+         MODAL PENGATURAN (Tombol "Pengaturan" di Menu Utama)
+    ====================================================================== -->
+    <div id="modal-settings" class="modal-backdrop">
+        <div class="sketch-card w-full max-w-[360px] p-5 bg-[#FDF7EB] relative">
+            <button onclick="closeModal('modal-settings')" class="icon-circle-btn w-9 h-9 absolute -top-3 -right-3 text-sm font-extrabold">✕</button>
+            <h3 class="font-display font-bold text-xl text-center text-[#3B2314] mb-4">⚙️ Pengaturan</h3>
+
+            <div class="space-y-3">
+                <div class="sketch-card p-3 flex items-center justify-between">
+                    <div>
+                        <div class="font-bold text-sm">Efek Suara Tombol</div>
+                        <div class="text-xs text-[#6E4423]">Suara klik kayu & notifikasi kuis</div>
+                    </div>
+                    <button id="toggleSfxBtn" onclick="toggleSfx()" class="sketch-pill px-4 py-1 text-xs font-extrabold bg-[#4C8256] text-white">
+                        AKTIF
+                    </button>
+                </div>
+
+                <div class="sketch-card p-3 flex items-center justify-between">
+                    <div>
+                        <div class="font-bold text-sm">Ukuran Teks Materi</div>
+                        <div class="text-xs text-[#6E4423]">Perbesar tulisan agar mudah dibaca</div>
+                    </div>
+                    <button id="toggleTextBtn" onclick="toggleLargeText()" class="sketch-pill px-4 py-1 text-xs font-extrabold bg-[#FFF9EC]">
+                        NORMAL
+                    </button>
+                </div>
+
+                <div class="sketch-card p-3 flex items-center justify-between">
+                    <div>
+                        <div class="font-bold text-sm">Reset Skor Terbaik</div>
+                        <div class="text-xs text-[#6E4423]">Hapus catatan skor tertinggi</div>
+                    </div>
+                    <button onclick="resetHighScore()" class="sketch-pill px-3.5 py-1 text-xs font-extrabold bg-[#FADBD8] text-[#8E3519]">
+                        RESET
+                    </button>
+                </div>
+            </div>
+
+            <button onclick="closeModal('modal-settings')" class="sketch-btn sketch-btn-primary w-full py-2.5 mt-4 text-base">
+                Simpan & Tutup
+            </button>
+        </div>
+    </div>
+
+    <!-- =====================================================================
+         MODAL KELUAR (Tombol "Keluar" di Menu Utama)
+    ====================================================================== -->
+    <div id="modal-exit" class="modal-backdrop">
+        <div class="sketch-card w-full max-w-[350px] p-5 bg-[#FDF7EB] text-center relative">
+            <div class="text-4xl mb-2">👋</div>
+            <h3 class="font-display font-bold text-xl text-[#3B2314] mb-1">Sampai Jumpa Lagi!</h3>
+            <p class="text-sm font-semibold text-[#5C3A21] mb-4 leading-relaxed">
+                Terima kasih telah belajar mengenal budaya dan Rumah Adat Sumba. Jangan lupa terus lestarikan budaya Indonesia!
+            </p>
+            <div class="flex gap-2.5">
+                <button onclick="closeModal('modal-exit')" class="sketch-btn sketch-btn-primary flex-1 py-2.5 text-sm">
+                    Lanjut Belajar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hiasan Motif Tenun Ikat Bawah -->
+    <div class="ikat-border mt-auto"></div>
+</div>
+
+<script>
+    /**
+     * =========================================================================
+     * SISTEM AUDIO SINTETIS (NADA KAYU / GAMELAN PENTATONIK)
+     * =========================================================================
+     */
+    class CulturalAudio {
+        constructor() {
+            this.ctx = null;
+            this.enabled = true;
+        }
+
+        init() {
+            if (!this.ctx) {
+                const AudioCtx = window.AudioContext || window.webkitAudioContext;
+                this.ctx = new AudioCtx();
+            }
+            if (this.ctx.state === 'suspended') {
+                this.ctx.resume();
+            }
+        }
+
+        playClick() {
+            if (!this.enabled) return;
+            try {
+                this.init();
+                const now = this.ctx.currentTime;
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(520, now);
+                osc.frequency.exponentialRampToValueAtTime(260, now + 0.07);
+                gain.gain.setValueAtTime(0.14, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start(now);
+                osc.stop(now + 0.08);
+            } catch (e) {}
+        }
+
+        playCorrect() {
+            if (!this.enabled) return;
+            try {
+                this.init();
+                const notes = [523.25, 659.25, 783.99]; // C5, E5, G5
+                notes.forEach((freq, idx) => {
+                    const now = this.ctx.currentTime + idx * 0.08;
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(freq, now);
+                    gain.gain.setValueAtTime(0.15, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+                    osc.connect(gain);
+                    gain.connect(this.ctx.destination);
+                    osc.start(now);
+                    osc.stop(now + 0.25);
+                });
+            } catch (e) {}
+        }
+
+        playWrong() {
+            if (!this.enabled) return;
+            try {
+                this.init();
+                const now = this.ctx.currentTime;
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(190, now);
+                osc.frequency.linearRampToValueAtTime(135, now + 0.24);
+                gain.gain.setValueAtTime(0.12, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start(now);
+                osc.stop(now + 0.25);
+            } catch (e) {}
+        }
+    }
+
+    const sfx = new CulturalAudio();
+
+    /**
+     * =========================================================================
+     * GENERATOR ILUSTRASI SVG RUMAH ADAT SUMBA (UMA MBARU) & RUMAH PEMBANDING
+     * =========================================================================
+     */
+    function getUmaMbaruSVG(interactive = false) {
+        return `
+        <svg class="w-full max-w-[270px] h-auto" viewBox="0 0 300 185" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Semak Kiri & Kanan -->
+            <path d="M22 174C22 162 32 155 42 160C46 152 58 153 62 164C70 162 76 168 76 174H22Z" fill="#4C8256" stroke="#3B2314" stroke-width="2.5"/>
+            <path d="M278 174C278 162 268 155 258 160C254 152 242 153 238 164C230 162 224 168 224 174H278Z" fill="#4C8256" stroke="#3B2314" stroke-width="2.5"/>
+            
+            <!-- Garis Tanah -->
+            <line x1="15" y1="174" x2="285" y2="174" stroke="#3B2314" stroke-width="3" stroke-linecap="round"/>
+
+            <!-- TINGKAT 1 (BAWAH): Kolong & Tiang Kayu (Kali Kabunga) -->
+            <g class="${interactive ? 'hotspot-zone' : ''}" ${interactive ? 'onclick="showHotspot(3)"' : ''}>
+                <rect x="68" y="132" width="9" height="42" fill="#5C3A21" stroke="#3B2314" stroke-width="2.2"/>
+                <rect x="96" y="132" width="9" height="42" fill="#5C3A21" stroke="#3B2314" stroke-width="2.2"/>
+                <rect x="195" y="132" width="9" height="42" fill="#5C3A21" stroke="#3B2314" stroke-width="2.2"/>
+                <rect x="223" y="132" width="9" height="42" fill="#5C3A21" stroke="#3B2314" stroke-width="2.2"/>
+                <rect x="64" y="148" width="172" height="6" fill="#8C5832" stroke="#3B2314" stroke-width="2"/>
+                <!-- Tangga Bambu/Kayu -->
+                <path d="M134 174L140 132H160L166 174" fill="#B57B45" stroke="#3B2314" stroke-width="2.3"/>
+                <line x1="136" y1="164" x2="164" y2="164" stroke="#3B2314" stroke-width="2.2"/>
+                <line x1="137" y1="154" x2="163" y2="154" stroke="#3B2314" stroke-width="2.2"/>
+                <line x1="138" y1="144" x2="162" y2="144" stroke="#3B2314" stroke-width="2.2"/>
+            </g>
+
+            <!-- TINGKAT 2 (TENGAH): Badan Rumah & Serambi (Bei) -->
+            <g class="${interactive ? 'hotspot-zone' : ''}" ${interactive ? 'onclick="showHotspot(2)"' : ''}>
+                <rect x="58" y="102" width="184" height="30" rx="3" fill="#D29354" stroke="#3B2314" stroke-width="2.5"/>
+                <rect x="54" y="112" width="192" height="20" fill="#E6B87D" stroke="#3B2314" stroke-width="2.2"/>
+                <!-- Kisi-kisi Teras -->
+                <line x1="74" y1="112" x2="74" y2="132" stroke="#3B2314" stroke-width="2"/>
+                <line x1="94" y1="112" x2="94" y2="132" stroke="#3B2314" stroke-width="2"/>
+                <line x1="114" y1="112" x2="114" y2="132" stroke="#3B2314" stroke-width="2"/>
+                <line x1="186" y1="112" x2="186" y2="132" stroke="#3B2314" stroke-width="2"/>
+                <line x1="206" y1="112" x2="206" y2="132" stroke="#3B2314" stroke-width="2"/>
+                <line x1="226" y1="112" x2="226" y2="132" stroke="#3B2314" stroke-width="2"/>
+                <!-- Pintu Utama -->
+                <rect x="140" y="104" width="20" height="28" fill="#4A2C18" stroke="#3B2314" stroke-width="2.2"/>
+            </g>
+
+            <!-- TINGKAT 3 (ATAS): Atap Menara Alang-alang (Uma Daluku) -->
+            <g class="${interactive ? 'hotspot-zone' : ''}" ${interactive ? 'onclick="showHotspot(1)"' : ''}>
+                <path d="M30 104C64 87 100 68 120 46L132 12H168L180 46C200 68 236 87 270 104C230 109 70 109 30 104Z" fill="#DDA95B" stroke="#3B2314" stroke-width="2.8" stroke-linejoin="round"/>
+                <!-- Guratan Serat Alang-alang -->
+                <path d="M138 20L132 45M150 18V46M162 20L168 45" stroke="#7E5325" stroke-width="2" stroke-linecap="round"/>
+                <path d="M114 58L90 92M132 58L118 95M150 58V96M168 58L182 95M186 58L210 92" stroke="#7E5325" stroke-width="2" stroke-linecap="round"/>
+                <!-- Hiasan Bubungan Puncak -->
+                <line x1="130" y1="12" x2="170" y2="12" stroke="#3B2314" stroke-width="3.5" stroke-linecap="round"/>
+                <circle cx="132" cy="8" r="2.5" fill="#B84A27"/>
+                <circle cx="168" cy="8" r="2.5" fill="#B84A27"/>
+            </g>
+
+            <!-- Pin Nomor Hotspot jika mode interaktif -->
+            ${interactive ? `
+                <g onclick="showHotspot(1)" class="hotspot-zone hotspot-badge" style="transform-origin: 150px 44px;">
+                    <circle cx="150" cy="44" r="13" fill="#B84A27" stroke="#FFFDF9" stroke-width="2.5"/>
+                    <text x="150" y="49" text-anchor="middle" font-family="Fredoka, sans-serif" font-weight="700" font-size="13" fill="#FFFFFF">1</text>
+                </g>
+                <g onclick="showHotspot(2)" class="hotspot-zone hotspot-badge" style="transform-origin: 95px 118px;">
+                    <circle cx="95" cy="118" r="13" fill="#E29D38" stroke="#3B2314" stroke-width="2.5"/>
+                    <text x="95" y="123" text-anchor="middle" font-family="Fredoka, sans-serif" font-weight="700" font-size="13" fill="#3B2314">2</text>
+                </g>
+                <g onclick="showHotspot(3)" class="hotspot-zone hotspot-badge" style="transform-origin: 205px 154px;">
+                    <circle cx="205" cy="154" r="13" fill="#3E6B48" stroke="#FFFDF9" stroke-width="2.5"/>
+                    <text x="205" y="159" text-anchor="middle" font-family="Fredoka, sans-serif" font-weight="700" font-size="13" fill="#FFFFFF">3</text>
+                </g>
+            ` : ''}
+        </svg>`;
+    }
+
+    // Ilustrasi Tambahan untuk Variasi Soal Kuis
+    function getQuizIllustration(type) {
+        if (type === 'uma_mbaru') return getUmaMbaruSVG(false);
+        if (type === 'three_levels') return getUmaMbaruSVG(true);
+        if (type === 'thatch_roof') {
+            return `
+            <svg class="w-44 h-auto" viewBox="0 0 220 130" fill="none">
+                <path d="M25 110C55 85 80 55 92 20H128C140 55 165 85 195 110H25Z" fill="#DDA95B" stroke="#3B2314" stroke-width="3" stroke-linejoin="round"/>
+                <path d="M98 32L82 95M110 28V98M122 32L138 95M76 62L55 98M144 62L165 98" stroke="#7E5325" stroke-width="2.5" stroke-linecap="round"/>
+                <rect x="65" y="112" width="90" height="14" rx="7" fill="#3B2314"/>
+                <text x="110" y="122" text-anchor="middle" font-family="Nunito" font-weight="800" font-size="9" fill="#FCE8B2">ATAP ALANG-ALANG</text>
+            </svg>`;
+        }
+        if (type === 'marapu_spirit') {
+            return `
+            <svg class="w-44 h-auto" viewBox="0 0 220 130" fill="none">
+                <circle cx="110" cy="62" r="46" fill="#FCE8B2" stroke="#3B2314" stroke-width="3"/>
+                <path d="M72 78L102 32H118L148 78H72Z" fill="#B84A27" stroke="#3B2314" stroke-width="2.5"/>
+                <circle cx="110" cy="18" r="6" fill="#E29D38" stroke="#3B2314" stroke-width="2"/>
+                <path d="M88 92C96 86 124 86 132 92" stroke="#3B2314" stroke-width="3" stroke-linecap="round"/>
+                <text x="110" y="122" text-anchor="middle" font-family="Fredoka" font-weight="700" font-size="12" fill="#3B2314">SIMBOL MARAPU</text>
+            </svg>`;
+        }
+        return getUmaMbaruSVG(false);
+    }
+
+    /**
+     * =========================================================================
+     * DATA MATERI BELAJAR (4 BAB LENGKAP)
+     * =========================================================================
+     */
+    const learnTopics = [
+        {
+            header: "Rumah Adat Uma Mbaru",
+            question: "Apa itu Uma Mbaru ?",
+            desc: "Uma Mbaru adalah rumah adat khas Sumba yang berbentuk tinggi dan bertingkat. Rumah ini melambangkan hubungan manusia dengan leluhur dan alam.",
+            traits: [
+                "Bentuk tinggi menjulang seperti menara",
+                "Atap terbuat dari susunan daun alang-alang",
+                "Dipakai untuk tempat tinggal & upacara adat"
+            ]
+        },
+        {
+            header: "3 Tingkat Rumah Sumba",
+            question: "Apa saja 3 bagian tingkatnya ?",
+            desc: "Arsitektur rumah adat Sumba dibagi secara vertikal menjadi tiga tingkatan ruang yang masing-masing memiliki fungsi sakral dan sehari-hari.",
+            traits: [
+                "Atas (Uma Daluku): Menara penyimpanan benda pusaka",
+                "Tengah (Bei): Ruang utama keluarga, dapur, & musyawarah",
+                "Bawah (Kali Kabunga): Kolong rumah untuk hewan ternak"
+            ]
+        },
+        {
+            header: "Filosofi & Tradisi Marapu",
+            question: "Mengapa atapnya menjulang tinggi ?",
+            desc: "Puncak atap yang tinggi melambangkan kedekatan dengan Marapu (roh leluhur dan Sang Pencipta) dalam kepercayaan tradisional masyarakat Sumba.",
+            traits: [
+                "Tiang utama (Kambaniru) menjadi pusat kekuatan rumah",
+                "Terdapat tanduk kerbau sebagai simbol kemakmuran",
+                "Menjadi pusat penyelenggaraan ritual adat kampung"
+            ]
+        },
+        {
+            header: "Bahan Bangunan Alami",
+            question: "Terbuat dari apa Uma Mbaru ?",
+            desc: "Seluruh konstruksi Uma Mbaru dibangun tanpa paku besi, melainkan mengandalkan pasak kayu dan ikatan tali alami yang tahan gempa.",
+            traits: [
+                "Tiang dari kayu keras tahan lama (kayu hitam/cendana)",
+                "Atap tebal dari ikatan rumput alang-alang kering",
+                "Dinding dan lantai dari anyaman bambu belah"
+            ]
+        }
+    ];
+
+    const hotspotDetails = {
+        1: "1️⃣ <b>Atap Menara (Uma Daluku):</b> Bagian paling atas untuk menyimpan benda pusaka & tempat pemujaan leluhur (Marapu).",
+        2: "2️⃣ <b>Ruang Tengah (Bei):</b> Tempat tinggal keluarga, perapian dapur, serta tempat berkumpul dan musyawarah adat.",
+        3: "3️⃣ <b>Kolong Rumah (Kali Kabunga):</b> Bagian paling bawah di antara tiang panggung untuk memelihara ternak seperti babi dan ayam."
+    };
+
+    let currentTopicIndex = 0;
+
+    function selectLearnTopic(index) {
+        sfx.playClick();
+        currentTopicIndex = index;
+        const topic = learnTopics[index];
+
+        document.getElementById('learnHeaderTitle').textContent = topic.header;
+        document.getElementById('learnQuestionTitle').textContent = topic.question;
+        document.getElementById('learnDescription').textContent = topic.desc;
+
+        const listEl = document.getElementById('learnTraitsList');
+        listEl.innerHTML = topic.traits.map(t => `<li>${t}</li>`).join('');
+
+        // Update status tab aktif
+        const tabs = document.querySelectorAll('.topic-tab');
+        tabs.forEach((tab, idx) => {
+            if (idx === index) {
+                tab.classList.add('bg-[#B84A27]', 'text-white');
+            } else {
+                tab.classList.remove('bg-[#B84A27]', 'text-white');
+            }
+        });
+    }
+
+    function nextLearnTopic() {
+        const nextIdx = (currentTopicIndex + 1) % learnTopics.length;
+        selectLearnTopic(nextIdx);
+    }
+
+    function showHotspot(level) {
+        sfx.playClick();
+        const banner = document.getElementById('hotspotInfoText');
+        banner.innerHTML = hotspotDetails[level];
+    }
+
+    /**
+     * =========================================================================
+     * DATA KUIS PENGETAHUAN (8 SOAL INTERAKTIF)
+     * =========================================================================
+     */
+    const quizQuestions = [
+        {
+            question: "Apa nama rumah adat pada gambar ini ?",
+            visual: "uma_mbaru",
+            options: ["Rumah Panggung", "Uma Mbaru", "Rumah Gadang", "Rumah Joglo"],
+            answer: 1,
+            explanation: "Tepat! Rumah adat khas Pulau Sumba dengan atap menara menjulang tinggi ini bernama Uma Mbaru."
+        },
+        {
+            question: "Dari provinsi manakah rumah adat Uma Mbaru berasal ?",
+            visual: "uma_mbaru",
+            options: ["Sumatera Barat", "Nusa Tenggara Timur", "Kalimantan Timur", "Sulawesi Selatan"],
+            answer: 1,
+            explanation: "Benar! Pulau Sumba terletak di Provinsi Nusa Tenggara Timur (NTT)."
+        },
+        {
+            question: "Bahan alami apa yang digunakan untuk membuat atap menara Uma Mbaru ?",
+            visual: "thatch_roof",
+            options: ["Genteng tanah liat", "Seng logam", "Daun alang-alang", "Sirap kayu ulin"],
+            answer: 2,
+            explanation: "Hebat! Atap Uma Mbaru disusun tebal dari ikatan rumput/daun alang-alang kering agar sejuk."
+        },
+        {
+            question: "Apa fungsi bagian paling bawah (kolong rumah / Kali Kabunga) pada rumah adat Sumba ?",
+            visual: "three_levels",
+            options: ["Menyimpan benda pusaka", "Memelihara hewan ternak", "Tempat menerima tamu", "Tempat tidur kepala suku"],
+            answer: 1,
+            explanation: "Tepat! Bagian kolong bawah dimanfaatkan warga untuk memelihara ternak seperti ayam dan babi."
+        },
+        {
+            question: "Bagian tingkat tengah (Bei) pada rumah adat Sumba berfungsi sebagai...",
+            visual: "three_levels",
+            options: ["Ruang keluarga, dapur & musyawarah", "Menara pemujaan roh leluhur", "Kandang kerbau dan kuda", "Tempat menjemur padi"],
+            answer: 0,
+            explanation: "Benar! Tingkat tengah (Bei) adalah pusat aktivitas keluarga sehari-hari dan tempat perapian."
+        },
+        {
+            question: "Mengapa bentuk atap Uma Mbaru dibuat menjulang tinggi seperti menara ?",
+            visual: "marapu_spirit",
+            options: ["Agar terlihat dari laut", "Melambangkan hubungan dengan Marapu (leluhur)", "Untuk menampung air hujan", "Mengikuti gaya bangunan modern"],
+            answer: 1,
+            explanation: "Luar biasa! Puncak menara melambangkan kedekatan dan penghormatan kepada roh leluhur (Marapu)."
+        },
+        {
+            question: "Berapa jumlah tingkatan ruang vertikal utama pada arsitektur rumah adat Sumba ?",
+            visual: "three_levels",
+            options: ["2 tingkat", "3 tingkat", "4 tingkat", "5 tingkat"],
+            answer: 1,
+            explanation: "Benar! Ada 3 tingkat utama: Kolong bawah (ternak), ruang tengah (keluarga), dan menara atas (pusaka)."
+        },
+        {
+            question: "Bagaimana cara menyambung kerangka kayu pada pembangunan Uma Mbaru tradisional ?",
+            visual: "uma_mbaru",
+            options: ["Menggunakan semen beton", "Menggunakan pasak kayu & tali ikat alami", "Menggunakan las besi", "Menggunakan lem plastik"],
+            answer: 1,
+            explanation: "Tepat sekali! Konstruksi pasak kayu dan ikatan tali membuat rumah adat Sumba lentur dan tahan gempa."
+        }
+    ];
+
+    let currentQuizIdx = 0;
+    let quizScore = 0;
+    let quizAnswered = false;
+    let bestScore = 0;
+
+    try {
+        bestScore = parseInt(localStorage.getItem('sumbaBestScore') || '0', 10);
+    } catch (e) {}
+
+    function updateBestScoreUI() {
+        document.getElementById('menuBestScore').textContent = bestScore;
+    }
+
+    function startQuiz() {
+        sfx.playClick();
+        currentQuizIdx = 0;
+        quizScore = 0;
+        quizAnswered = false;
+        navigateTo('screen-quiz');
+        renderQuizQuestion();
+    }
+
+    function renderQuizQuestion() {
+        quizAnswered = false;
+        const q = quizQuestions[currentQuizIdx];
+
+        document.getElementById('quizProgressLabel').textContent = `Soal ${currentQuizIdx + 1} dari ${quizQuestions.length}`;
+        document.getElementById('quizQuestionText').textContent = q.question;
+        document.getElementById('quizIllustrationBox').innerHTML = getQuizIllustration(q.visual);
+        document.getElementById('quizScoreDisplay').textContent = quizScore;
+
+        const feedbackBox = document.getElementById('quizFeedbackBox');
+        feedbackBox.classList.add('hidden');
+
+        const letters = ['A', 'B', 'C', 'D'];
+        const optionsContainer = document.getElementById('quizOptionsContainer');
+        optionsContainer.innerHTML = q.options.map((opt, idx) => `
+            <button onclick="selectQuizOption(${idx})" id="quizOpt${idx}" class="sketch-btn py-2.5 px-4 text-left justify-start gap-3 bg-[#FFFDF9]">
+                <span class="font-display font-bold text-sm w-7 h-7 rounded-full bg-[#FCE8B2] border-2 border-[#3B2314] flex items-center justify-center flex-shrink-0">
+                    ${letters[idx]}
+                </span>
+                <span class="quiz-opt-text text-sm font-extrabold text-[#3B2314]">${opt}</span>
+            </button>
+        `).join('');
+    }
+
+    function selectQuizOption(selectedIdx) {
+        if (quizAnswered) return;
+        quizAnswered = true;
+
+        const q = quizQuestions[currentQuizIdx];
+        const isCorrect = selectedIdx === q.answer;
+        const feedbackBox = document.getElementById('quizFeedbackBox');
+        const feedbackText = document.getElementById('quizFeedbackText');
+
+        // Warnai tombol benar & salah
+        q.options.forEach((_, idx) => {
+            const btn = document.getElementById(`quizOpt${idx}`);
+            btn.style.pointerEvents = 'none';
+            if (idx === q.answer) {
+                btn.style.backgroundColor = '#D4EFDF';
+                btn.style.borderColor = '#1E8449';
+            } else if (idx === selectedIdx && !isCorrect) {
+                btn.style.backgroundColor = '#FADBD8';
+                btn.style.borderColor = '#922B21';
+                btn.classList.add('shake-anim');
+            }
+        });
+
+        if (isCorrect) {
+            quizScore += 10;
+            sfx.playCorrect();
+            feedbackBox.style.backgroundColor = '#D4EFDF';
+            feedbackText.innerHTML = `✅ <b>Jawaban Benar! (+10 Poin)</b><br>${q.explanation}`;
+        } else {
+            sfx.playWrong();
+            feedbackBox.style.backgroundColor = '#FADBD8';
+            feedbackText.innerHTML = `❌ <b>Kurang Tepat!</b><br>${q.explanation}`;
+        }
+
+        document.getElementById('quizScoreDisplay').textContent = quizScore;
+        feedbackBox.classList.remove('hidden');
+    }
+
+    function nextQuizQuestion() {
+        sfx.playClick();
+        currentQuizIdx++;
+        if (currentQuizIdx < quizQuestions.length) {
+            renderQuizQuestion();
+        } else {
+            showQuizResult();
+        }
+    }
+
+    function showQuizResult() {
+        if (quizScore > bestScore) {
+            bestScore = quizScore;
+            try {
+                localStorage.setItem('sumbaBestScore', bestScore.toString());
+            } catch (e) {}
+            updateBestScoreUI();
+        }
+
+        const maxPossible = quizQuestions.length * 10;
+        document.getElementById('resultFinalScore').textContent = `${quizScore} / ${maxPossible}`;
+
+        let stars = '⭐';
+        let rank = 'Pelajar Pemula Budaya';
+        let msg = 'Terus semangat belajar! Baca kembali materi Uma Mbaru agar nilaimu semakin tinggi.';
+
+        if (quizScore >= 70) {
+            stars = '⭐⭐⭐';
+            rank = 'Gelar: Ahli Budaya Sumba!';
+            msg = 'Luar biasa! Kamu menguasai pengetahuan tentang struktur, bahan, dan filosofi Rumah Adat Uma Mbaru dengan sempurna.';
+        } else if (quizScore >= 40) {
+            stars = '⭐⭐';
+            rank = 'Gelar: Sahabat Budaya Nusantara';
+            msg = 'Bagus sekali! Kamu sudah mengenal ciri-ciri utama Rumah Adat Sumba. Coba ulangi lagi untuk meraih skor penuh!';
+        }
+
+        document.getElementById('resultStars').textContent = stars;
+        document.getElementById('resultRankBadge').textContent = rank;
+        document.getElementById('resultMessage').textContent = msg;
+
+        navigateTo('screen-result');
+    }
+
+    /**
+     * =========================================================================
+     * MINI-GAME RAKIT RUMAH ADAT UMA MBARU
+     * =========================================================================
+     */
+    let buildStep = 1; // Urutan wajib: 1 (Tiang) -> 2 (Badan) -> 3 (Atap)
+
+    function openBuildGame() {
+        sfx.playClick();
+        resetBuildGame();
+        navigateTo('screen-build');
+    }
+
+    function resetBuildGame() {
+        buildStep = 1;
+        document.getElementById('buildPart1').classList.add('hidden');
+        document.getElementById('buildPart2').classList.add('hidden');
+        document.getElementById('buildPart3').classList.add('hidden');
+
+        [1, 2, 3].forEach(num => {
+            const btn = document.getElementById(`btnPart${num}`);
+            btn.disabled = false;
+            btn.style.opacity = '1';
+            btn.style.backgroundColor = '';
+        });
+
+        document.getElementById('buildInstruction').textContent =
+            "Susun rumah adat dari bawah ke atas! Pilih komponen fondasi terlebih dahulu:";
+        document.getElementById('buildFactBox').innerHTML =
+            "💡 <b>Tahap 1:</b> Pasang <b>Tiang Kayu & Kolong (Kali Kabunga)</b> terlebih dahulu sebagai penyangga rumah panggung!";
+    }
+
+    function placeBuildPart(partNum) {
+        if (partNum !== buildStep) {
+            sfx.playWrong();
+            const btn = document.getElementById(`btnPart${partNum}`);
+            btn.classList.remove('shake-anim');
+            void btn.offsetWidth;
+            btn.classList.add('shake-anim');
+            document.getElementById('buildFactBox').innerHTML =
+                `⚠️ <b>Urutan Belum Tepat!</b> Kita harus membangun dari bagian bawah ke atas (Saat ini butuh <b>Tahap ${buildStep}</b>).`;
+            return;
+        }
+
+        sfx.playCorrect();
+        document.getElementById(`buildPart${partNum}`).classList.remove('hidden');
+        const btn = document.getElementById(`btnPart${partNum}`);
+        btn.disabled = true;
+        btn.style.opacity = '0.5';
+        btn.style.backgroundColor = '#D4EFDF';
+
+        if (buildStep === 1) {
+            buildStep = 2;
+            document.getElementById('buildInstruction').textContent = "Bagus! Sekarang pasang tingkat kedua di atas tiang:";
+            document.getElementById('buildFactBox').innerHTML =
+                "✅ <b>Tiang & Kolong Terpasang!</b> Sekarang pilih <b>Badan & Teras (Bei)</b> untuk tempat tinggal keluarga.";
+        } else if (buildStep === 2) {
+            buildStep = 3;
+            document.getElementById('buildInstruction').textContent = "Hampir selesai! Pasang bagian puncak rumah:";
+            document.getElementById('buildFactBox').innerHTML =
+                "✅ <b>Ruang Tengah Terpasang!</b> Terakhir, pasang <b>Atap Menara Alang-alang (Uma Daluku)</b> di puncak!";
+        } else if (buildStep === 3) {
+            buildStep = 4;
+            document.getElementById('buildInstruction').textContent = "🎉 Selamat! Rumah Adat Uma Mbaru berhasil dibangun!";
+            document.getElementById('buildFactBox').innerHTML =
+                "🏆 <b>Sempurna!</b> Ketiga tingkat Uma Mbaru telah tersusun kokoh melambangkan harmoni alam, manusia, dan leluhur.";
+        }
+    }
+
+    /**
+     * =========================================================================
+     * NAVIGASI LAYAR, MODAL & PENGATURAN
+     * =========================================================================
+     */
+    function navigateTo(screenId) {
+        sfx.playClick();
+        document.querySelectorAll('.screen').forEach(sec => sec.classList.remove('active'));
+        document.getElementById(screenId).classList.add('active');
+    }
+
+    function openModeSelect() {
+        sfx.playClick();
+        openModal('modal-modes');
+    }
+
+    function openModal(modalId) {
+        sfx.playClick();
+        document.getElementById(modalId).classList.add('open');
+    }
+
+    function closeModal(modalId) {
+        sfx.playClick();
+        document.getElementById(modalId).classList.remove('open');
+    }
+
+    function toggleSfx() {
+        sfx.enabled = !sfx.enabled;
+        const btn = document.getElementById('toggleSfxBtn');
+        if (sfx.enabled) {
+            sfx.playClick();
+            btn.textContent = 'AKTIF';
+            btn.className = 'sketch-pill px-4 py-1 text-xs font-extrabold bg-[#4C8256] text-white';
+        } else {
+            btn.textContent = 'MATI';
+            btn.className = 'sketch-pill px-4 py-1 text-xs font-extrabold bg-[#FADBD8] text-[#8E3519]';
+        }
+    }
+
+    function toggleLargeText() {
+        sfx.playClick();
+        document.body.classList.toggle('large-text');
+        const btn = document.getElementById('toggleTextBtn');
+        const isLarge = document.body.classList.contains('large-text');
+        btn.textContent = isLarge ? 'BESAR' : 'NORMAL';
+        btn.classList.toggle('bg-[#E29D38]', isLarge);
+    }
+
+    function resetHighScore() {
+        sfx.playClick();
+        bestScore = 0;
+        try {
+            localStorage.removeItem('sumbaBestScore');
+        } catch (e) {}
+        updateBestScoreUI();
+        const btn = event.target;
+        btn.textContent = 'TERHAPUS ✓';
+        setTimeout(() => { btn.textContent = 'RESET'; }, 1200);
+    }
+
+    // Inisialisasi Ilustrasi saat halaman dimuat
+    window.onload = function () {
+        document.getElementById('menuHouseIllustration').innerHTML = getUmaMbaruSVG(false);
+        document.getElementById('learnHouseContainer').innerHTML = getUmaMbaruSVG(true);
+        updateBestScoreUI();
+    };
+</script>
+</body>
+</html>
